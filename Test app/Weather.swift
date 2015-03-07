@@ -34,8 +34,20 @@ class Weather {
             switch self {
             case .N:
                 return "N"
-            default:
-                return ""
+            case .NE:
+                return "NE"
+            case .E:
+                return "E"
+            case .SE:
+                return "SE"
+            case .S:
+                return "S"
+            case .SW:
+                return "SW"
+            case .W:
+                return "W"
+            case .NW:
+                return "NW"
             }
         }
         
@@ -45,14 +57,35 @@ class Weather {
     var windDirection: WindDirection = WindDirection.N
     
     enum Cloudness {
-        case Sunny, Windy, RainShowers, Lightning, Cloudy, Foggy
+        case Sunny, Windy, RainShowers, Lightning, Cloudy
         
         func description() -> String {
             switch self {
+            case .Sunny:
+                return "Sunny"
+            case .Windy:
+                return "Windy"
             case .RainShowers:
                 return "Rain Showers"
-            default:
-                return ""
+            case .Lightning:
+                return "Lightning"
+            case .Cloudy:
+                return "Cloudy"
+            }
+        }
+        
+        func imageName() -> String {
+            switch self {
+            case .Sunny:
+                return "Sun_Big"
+            case .Windy:
+                return "WInd_Big"
+            case .RainShowers:
+                return "Rain Showers"
+            case .Lightning:
+                return "Lightning_Big"
+            case .Cloudy:
+                return "Cloudy_Big"
             }
         }
     }
@@ -65,13 +98,14 @@ class Weather {
         self.temperature = temperature
     }
     
-    init(temperature: Float, humidity: Int, precipitiation: Float, pressureMB: Int, windSpeed: Int, windDirection: WindDirection, date: NSDate) {
+    init(temperature: Float, humidity: Int, precipitiation: Float, pressureMB: Int, windSpeed: Int, windDirection: WindDirection, cloudness: Cloudness, date: NSDate) {
         self.temperature = temperature
         self.humidity = humidity
         self.precipitiation = precipitiation
         self.pressureMB = pressureMB
         self.windSpeed = windSpeed
         self.windDirection = windDirection
+        self.cloudness = cloudness
         self.date = date
     }
 

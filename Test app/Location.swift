@@ -11,6 +11,10 @@ import Foundation
 class Location {
     
     var title: String = ""
+    
+    var fullTitle: String {
+        return title
+    }
     var currentWeather: Weather?
     var weeklyWeather: [Weather] = [Weather]()
     var currentGeoLocation: Bool = false
