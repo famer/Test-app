@@ -13,6 +13,7 @@ class Location {
     var title: String = ""
     var currentWeather: Weather?
     var weeklyWeather: [Weather] = [Weather]()
+    var currentGeoLocation: Bool = false
     
     init () {}
     

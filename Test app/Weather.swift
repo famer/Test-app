@@ -11,11 +11,6 @@ import Foundation
 class Weather {
     
     let FahrenheitZero: Float = 273.0
-    /*
-    enum temperaturet {
-        case Celsius(Float)
-        case Fahrenheit(Float)
-    }*/
     
     var temperature: Float = 0.0
     var temperatureCelsius: Float {
@@ -35,11 +30,21 @@ class Weather {
     
     enum WindDirection: Int {
         case N, NE, E, SE, S, SW, W, NW
+        func description() -> String {
+            switch self {
+            case .N:
+                return "N"
+            default:
+                return ""
+            }
+        }
+        
+        
     }
     
     var windDirection: WindDirection = WindDirection.N
     
-    enum cloud {
+    enum Cloudness {
         case Sunny, Windy, RainShowers, Lightning, Cloudy, Foggy
         
         func description() -> String {
@@ -51,16 +56,23 @@ class Weather {
             }
         }
     }
-    /*
-    enum cloudness: String {
-        case Sunny = "Sunny"
-        
-    }*/
+    
+    var cloudness: Cloudness = Cloudness.Cloudy
     
     var date: NSDate = NSDate()
     
     init(temperature: Float) {
         self.temperature = temperature
+    }
+    
+    init(temperature: Float, humidity: Int, precipitiation: Float, pressureMB: Int, windSpeed: Int, windDirection: WindDirection, date: NSDate) {
+        self.temperature = temperature
+        self.humidity = humidity
+        self.precipitiation = precipitiation
+        self.pressureMB = pressureMB
+        self.windSpeed = windSpeed
+        self.windDirection = windDirection
+        self.date = date
     }
 
 }
