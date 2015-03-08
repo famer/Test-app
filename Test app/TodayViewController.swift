@@ -34,6 +34,10 @@ class TodayViewController: UIViewController {
         location = mockLocation
     }
     
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
+        
+    }
+    
     func updateUI() {
         
         currentLocationSign.hidden = !location.currentGeoLocation
@@ -41,13 +45,18 @@ class TodayViewController: UIViewController {
         
         
         if let weather = location.currentWeather {
+            
+            let lengthMeasure = Settings.LengthMeasurement(rawValue: Settings.getOptionValue("Unit of length"))!
+            let tempertureMeasure = Settings.TemperatureMeasurement(rawValue: Settings.getOptionValue("Units of temperature"))!
+            
             cloudnessImage.image = UIImage(named: weather.cloudness.imageName())
-            weatherDescriptionLabel.text = "\(weather.getTemperature(.Celsius)) [C] | \(weather.cloudness.description())"
+            
+            weatherDescriptionLabel.text = "\(weather.getTemperature(tempertureMeasure)) \(tempertureMeasure.symbol) | \(weather.cloudness.description())"
             
             humidityLabel.text = "\(weather.humidity) %"
             precipitationLabel.text = "\(weather.precipitiation) mm"
             pressureLabel.text = "\(weather.pressureMB) hPa"
-            windSpeedLabel.text = "\(weather.windSpeed) [km/h]"
+            windSpeedLabel.text = "\(weather.getWindSpeed(lengthMeasure)) \(lengthMeasure.symbol)/h"
             windDirectionLabel.text = "\(weather.windDirection.description())"
             
         }

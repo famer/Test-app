@@ -28,6 +28,8 @@
 		264BC47B1AABC30900B9E14F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BC47A1AABC30900B9E14F /* SettingsTableViewController.swift */; };
 		264BC47D1AABC47600B9E14F /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BC47C1AABC47600B9E14F /* OptionTableViewCell.swift */; };
 		264BC47F1AABC7A400B9E14F /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BC47E1AABC7A400B9E14F /* Option.swift */; };
+		264BC4811AACBCD900B9E14F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BC4801AACBCD900B9E14F /* Settings.swift */; };
+		264BC4851AACEB3C00B9E14F /* LocationFinderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BC4841AACEB3C00B9E14F /* LocationFinderTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		264BC47A1AABC30900B9E14F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		264BC47C1AABC47600B9E14F /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		264BC47E1AABC7A400B9E14F /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		264BC4801AACBCD900B9E14F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		264BC4841AACEB3C00B9E14F /* LocationFinderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationFinderTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +114,8 @@
 				263CE9DF1AA6163800ED14DB /* AppDelegate.swift */,
 				263CE9E11AA6163800ED14DB /* ViewController.swift */,
 				263CE9E31AA6163800ED14DB /* Main.storyboard */,
-				264BC45C1AA64B5100B9E14F /* Models */,
+				264BC4831AACEACD00B9E14F /* Views */,
+				264BC45C1AA64B5100B9E14F /* Classes */,
 				264BC4611AA6556100B9E14F /* Controllers */,
 				263CE9E61AA6163800ED14DB /* Images.xcassets */,
 				263CE9E81AA6163800ED14DB /* LaunchScreen.xib */,
@@ -146,26 +151,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		264BC45C1AA64B5100B9E14F /* Models */ = {
+		264BC45C1AA64B5100B9E14F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				264BC45D1AA64B6400B9E14F /* Location.swift */,
 				264BC45F1AA64BFC00B9E14F /* Weather.swift */,
 				264BC47E1AABC7A400B9E14F /* Option.swift */,
+				264BC4801AACBCD900B9E14F /* Settings.swift */,
 			);
-			name = Models;
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		264BC4611AA6556100B9E14F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				264BC46A1AAB66E900B9E14F /* TodayViewController.swift */,
 				264BC4681AAA277600B9E14F /* ForecastTableViewController.swift */,
 				264BC4661AA73F7900B9E14F /* LocationsTableViewController.swift */,
-				264BC4621AA6563300B9E14F /* LocationTableViewCell.swift */,
-				264BC4641AA6564A00B9E14F /* WeatherTableViewCell.swift */,
-				264BC46A1AAB66E900B9E14F /* TodayViewController.swift */,
+				264BC4841AACEB3C00B9E14F /* LocationFinderTableViewController.swift */,
 				264BC47A1AABC30900B9E14F /* SettingsTableViewController.swift */,
-				264BC47C1AABC47600B9E14F /* OptionTableViewCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -187,6 +191,16 @@
 				264BC4731AAB77E800B9E14F /* ProximaNova-Semibold.otf */,
 			);
 			path = ProximaNova;
+			sourceTree = "<group>";
+		};
+		264BC4831AACEACD00B9E14F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				264BC4621AA6563300B9E14F /* LocationTableViewCell.swift */,
+				264BC4641AA6564A00B9E14F /* WeatherTableViewCell.swift */,
+				264BC47C1AABC47600B9E14F /* OptionTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +310,7 @@
 			files = (
 				264BC4651AA6564A00B9E14F /* WeatherTableViewCell.swift in Sources */,
 				264BC4601AA64BFC00B9E14F /* Weather.swift in Sources */,
+				264BC4811AACBCD900B9E14F /* Settings.swift in Sources */,
 				264BC46B1AAB66E900B9E14F /* TodayViewController.swift in Sources */,
 				264BC4631AA6563300B9E14F /* LocationTableViewCell.swift in Sources */,
 				264BC47F1AABC7A400B9E14F /* Option.swift in Sources */,
@@ -303,6 +318,7 @@
 				263CE9E01AA6163800ED14DB /* AppDelegate.swift in Sources */,
 				264BC47B1AABC30900B9E14F /* SettingsTableViewController.swift in Sources */,
 				264BC45E1AA64B6400B9E14F /* Location.swift in Sources */,
+				264BC4851AACEB3C00B9E14F /* LocationFinderTableViewController.swift in Sources */,
 				264BC4691AAA277600B9E14F /* ForecastTableViewController.swift in Sources */,
 				264BC47D1AABC47600B9E14F /* OptionTableViewCell.swift in Sources */,
 				264BC4671AA73F7900B9E14F /* LocationsTableViewController.swift in Sources */,

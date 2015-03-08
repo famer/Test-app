@@ -16,21 +16,28 @@ class LocationTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var currentLocationSign: UIView!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var cellTitle: UILabel!
     @IBOutlet weak var cellSubtitle: UILabel!
     @IBOutlet weak var cellTemperature: UILabel!
     
     func updateUI() {
-        weatherImage.image = UIImage(named: "CL")//location.currentWeather.
+        let tempertureMeasure = Settings.TemperatureMeasurement(rawValue: Settings.getOptionValue("Units of temperature"))!
+        
+        cellTitle.text = location.title
+        currentLocationSign.hidden = !location.currentGeoLocation
         
         if let currentWeather = location.currentWeather {
-            self.cellSubtitle.text = String(currentWeather.windDirection.rawValue)
-            self.cellTemperature.text = "\(currentWeather.temperature)"
+            weatherImage.image = UIImage(named: currentWeather.cloudness.imageName())
+            self.cellSubtitle.text = currentWeather.cloudness.description()
+            self.cellTemperature.text = "\(currentWeather.getTemperature(tempertureMeasure))°"
         }
         
 
     }
+    
+    
     
     
 

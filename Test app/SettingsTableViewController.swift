@@ -32,22 +32,28 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Option Cell", forIndexPath: indexPath) as OptionTableViewCell
-        //var options = (settings.objectForKey(sections[indexPath.section])!.allKeys)
+        
         let optionTitle = (settings.objectForKey(sections[indexPath.section])!.allKeys)[indexPath.row]  as String
-        //let optionValue = NSUserDefaults.standardUserDefaults().objectForKey(settings[indexPath.row])
-        var optionValueLabel: String
+        
+        
+        
+        let optionValue = Settings.getOptionValue(optionTitle)
+        
+        var values: [String]
         
         switch optionTitle {
-        case "Units of length":
-            ""//optionValueLabel = Weather.LengthMeasurement(optionValue).description()
+        case "Unit of length":
+            values = Settings.LengthMeasurement.getValues()
+            
         case "Units of temperature":
-            ""//optionValueLabel = Weather.TemperatureMeasurement(optionValue).description()
+            values = Settings.TemperatureMeasurement.getValues()
+            
         default:
-            ""
+            values = []
             
         }
         
-        cell.option = Option(title: optionTitle, value: "Units")
+        cell.option = Option(title: optionTitle, value: optionValue, values: values)
         
         return cell
     }

@@ -11,12 +11,21 @@ import Foundation
 class Option {
     
     var title: String = ""
-    var value: String = ""
+    var value: String  {
+        return values[intValue]
+    }
+    var intValue: Int = 0
+    var values: [String] = []
     
     init() {}
     
-    init(title: String, value: String) {
+    init(title: String, value: Int, values: [String]) {
         self.title = title
-        self.value = value
+        self.intValue = value
+        self.values = values
+    }
+    
+    func nextValue() {
+        intValue = (intValue + 1) % values.count
     }
 }

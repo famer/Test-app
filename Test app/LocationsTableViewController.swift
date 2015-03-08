@@ -14,11 +14,18 @@ class LocationsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let location1 = Location(title: "NY")
-        let location2 = Location(title: "SF")
+        let location1 = Location(title: "Vienna")
+        location1.currentGeoLocation = true
+        location1.currentWeather = Weather(temperature: 12, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Sunny, date: NSDate())
+        let location2 = Location(title: "Paris")
+        location2.currentWeather = Weather(temperature: 8, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Cloudy, date: NSDate())
         
         locations = [location1, location2]
         
+        
+    }
+    
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         
     }
     
@@ -50,6 +57,11 @@ class LocationsTableViewController: UITableViewController {
         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation:UITableViewRowAnimation.Fade)
         
     }
+    
+    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String! {
+        return "x"
+    }
+    
 
 
 }

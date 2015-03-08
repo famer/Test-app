@@ -34,7 +34,7 @@ class Weather {
     }
     
     var windSpeedFeets: Int {
-        return windSpeed //* FeetsRatio
+        return windSpeed * 3//* FeetsRatio
     }
     
     enum WindDirection: Int {
@@ -103,16 +103,8 @@ class Weather {
     
     var date: NSDate = NSDate()
     
-    enum TemperatureMeasurement {
-        case Celsius, Fahrenheit
-    }
     
-    enum LengthMeasurement {
-        case Kilometers, Feets
-    }
-    
-    
-    func getTemperature(temperatureSetting: TemperatureMeasurement) -> Int{
+    func getTemperature(temperatureSetting: Settings.TemperatureMeasurement) -> Int{
         switch temperatureSetting {
         case .Celsius:
             return temperatureCelsius
@@ -121,9 +113,9 @@ class Weather {
         }
     }
     
-    func getWindSpeed(lengthSetting: LengthMeasurement) -> Int {
+    func getWindSpeed(lengthSetting: Settings.LengthMeasurement) -> Int {
         switch lengthSetting {
-        case .Kilometers:
+        case .Meters:
             return windSpeedKilometers
         case .Feets:
             return windSpeedFeets

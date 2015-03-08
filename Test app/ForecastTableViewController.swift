@@ -10,16 +10,35 @@ import UIKit
 
 class ForecastTableViewController: UITableViewController {
     
-    var location: Location = Location()
-    var forecast: [Weather] = []
+    var location: Location = Location() {
+        didSet {
+            updateUI()
+        }
+    }
+    var weeklyWeather: [Weather] {
+        return location.weeklyWeather
+    }
+    
+    @IBOutlet weak var locationTitleLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let weather1 = Weather(temperature: 21)
-        let weather2 = Weather(temperature: 20)
         
-        forecast = [weather1, weather2]
+        let weather1 = Weather(temperature: 12, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Cloudy, date: NSDate())
+        let weather2 = Weather(temperature: 15, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Sunny, date: NSDate())
         
+        location = Location(title: "Vienna")
+        location.weeklyWeather = [weather1, weather2]
+        
+        
+    }
+    
+    func updateUI() {
+        locationTitleLabel.text = location.title
+    }
+    
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         
     }
     
@@ -30,26 +49,14 @@ class ForecastTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return forecast.count
+        return weeklyWeather.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Weather Cell", forIndexPath: indexPath) as WeatherTableViewCell
-        let weather = self.forecast[indexPath.row] as Weather
+        let weather = self.weeklyWeather[indexPath.row] as Weather
         cell.weather = weather
         return cell
-    }
-    
-    
-    // Editing
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle:UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        //navigation.places.deleteFromRemoved(indexPath.row)
-        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation:UITableViewRowAnimation.Fade)
-        
     }
 
     

@@ -21,12 +21,19 @@ class OptionTableViewCell: UITableViewCell {
     
     func updateUI() {
         optionTitleLabel.text = option.title
-        optionValueButton.titleLabel?.text = option.value
+        //optionValueButton.titleLabel?.text = "asdf"//option.value
+        optionValueButton.setTitle(option.value, forState: .Normal)
     }
     
     
-    func saveOption(optionToSave: Option) {
-        NSUserDefaults.standardUserDefaults().setObject(optionToSave.value, forKey: optionToSave.title)
+    @IBAction func changeOption(sender: AnyObject) {
+        option.nextValue()
+        optionValueButton.setTitle(option.value, forState: .Normal)
+        saveOption()
+    }
+    
+    func saveOption() {
+        Settings.setOptionValue(option.title, value: option.intValue)
     }
 
 }
