@@ -42,7 +42,7 @@ class TodayViewController: UIViewController {
         
         if let weather = location.currentWeather {
             cloudnessImage.image = UIImage(named: weather.cloudness.imageName())
-            weatherDescriptionLabel.text = "\(weather.temperature) [C] | \(weather.cloudness.description())"
+            weatherDescriptionLabel.text = "\(weather.getTemperature(.Celsius)) [C] | \(weather.cloudness.description())"
             
             humidityLabel.text = "\(weather.humidity) %"
             precipitationLabel.text = "\(weather.precipitiation) mm"

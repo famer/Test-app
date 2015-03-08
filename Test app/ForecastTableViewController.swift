@@ -15,8 +15,8 @@ class ForecastTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let weather1 = Weather(temperature: 21.0)
-        let weather2 = Weather(temperature: 20.0)
+        let weather1 = Weather(temperature: 21)
+        let weather2 = Weather(temperature: 20)
         
         forecast = [weather1, weather2]
         
@@ -34,7 +34,7 @@ class ForecastTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Location Cell", forIndexPath: indexPath) as WeatherTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Weather Cell", forIndexPath: indexPath) as WeatherTableViewCell
         let weather = self.forecast[indexPath.row] as Weather
         cell.weather = weather
         return cell

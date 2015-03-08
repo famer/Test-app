@@ -10,13 +10,14 @@ import Foundation
 
 class Weather {
     
-    let FahrenheitZero: Float = 273.0
+    let FahrenheitZero: Int = 273
+    let FeetsRatio: Float = 2.8
     
-    var temperature: Float = 0.0
-    var temperatureCelsius: Float {
+    var temperature: Int = 0
+    var temperatureCelsius: Int {
         return temperature
     }
-    var temperatureFahrenheit: Float {
+    var temperatureFahrenheit: Int {
         return temperature + FahrenheitZero
     }
     
@@ -27,6 +28,14 @@ class Weather {
     var pressureMB: Int = 0
     
     var windSpeed: Int = 0
+    
+    var windSpeedKilometers: Int {
+        return windSpeed
+    }
+    
+    var windSpeedFeets: Int {
+        return windSpeed //* FeetsRatio
+    }
     
     enum WindDirection: Int {
         case N, NE, E, SE, S, SW, W, NW
@@ -94,11 +103,38 @@ class Weather {
     
     var date: NSDate = NSDate()
     
-    init(temperature: Float) {
+    enum TemperatureMeasurement {
+        case Celsius, Fahrenheit
+    }
+    
+    enum LengthMeasurement {
+        case Kilometers, Feets
+    }
+    
+    
+    func getTemperature(temperatureSetting: TemperatureMeasurement) -> Int{
+        switch temperatureSetting {
+        case .Celsius:
+            return temperatureCelsius
+        case .Fahrenheit:
+            return temperatureFahrenheit
+        }
+    }
+    
+    func getWindSpeed(lengthSetting: LengthMeasurement) -> Int {
+        switch lengthSetting {
+        case .Kilometers:
+            return windSpeedKilometers
+        case .Feets:
+            return windSpeedFeets
+        }
+    }
+    
+    init(temperature: Int) {
         self.temperature = temperature
     }
     
-    init(temperature: Float, humidity: Int, precipitiation: Float, pressureMB: Int, windSpeed: Int, windDirection: WindDirection, cloudness: Cloudness, date: NSDate) {
+    init(temperature: Int, humidity: Int, precipitiation: Float, pressureMB: Int, windSpeed: Int, windDirection: WindDirection, cloudness: Cloudness, date: NSDate) {
         self.temperature = temperature
         self.humidity = humidity
         self.precipitiation = precipitiation

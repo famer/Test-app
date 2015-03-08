@@ -10,7 +10,7 @@ import UIKit
 
 class WeatherTableViewCell: UITableViewCell {
     
-    var weather: Weather = Weather(temperature: 20.2) {
+    var weather: Weather = Weather(temperature: 20) {
         didSet {
             updateUI()
         }
