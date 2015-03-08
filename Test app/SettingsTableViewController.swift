@@ -19,7 +19,7 @@ class SettingsTableViewController: UITableViewController {
         settings = NSDictionary(contentsOfFile: path)!
         sections = settings.allKeys as [String]
         print(sections)
-         //data.valueForKey("Send location message scheme") as String
+        //self.tableView.backgroundColor = UIColor.whiteColor()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
