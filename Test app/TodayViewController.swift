@@ -29,6 +29,11 @@ class TodayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var locationHelper = LocationHelper.sharedInstance
+        locationHelper.completionBlock = {result in
+            (
+            )
+        }
         let mockLocation = Location(title: "Prague")
         mockLocation.currentWeather = Weather(temperature: 8, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Windy, date: NSDate())
         location = mockLocation
