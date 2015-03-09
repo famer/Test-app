@@ -45,7 +45,7 @@ class Settings {
             case .Meters:
                 return "km"
             case .Feets:
-                return "ft"
+                return "ml"
             }
         }
         
@@ -65,7 +65,11 @@ class Settings {
     }
     
     class func getOptionValue(title: String) -> Int {
-        return NSUserDefaults.standardUserDefaults().objectForKey(title) as Int!
+        if let value = NSUserDefaults.standardUserDefaults().objectForKey(title) as? Int {
+           return value
+        } else {
+            return 0
+        }
     }
     
     class func setOptionValue(title: String, value: Int) {

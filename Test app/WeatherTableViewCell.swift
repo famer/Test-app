@@ -29,7 +29,7 @@ class WeatherTableViewCell: UITableViewCell {
         
         weatherImage.image = UIImage(named: weather.cloudness.imageName())
         
-        cellTitle.text = "Monday"
+        cellTitle.text = weather.weekday
         self.cellSubtitle.text = weather.cloudness.description()
         self.cellTemperature.text = "\(weather.getTemperature(tempertureMeasure))°"
         

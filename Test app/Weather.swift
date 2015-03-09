@@ -10,15 +10,17 @@ import Foundation
 
 class Weather {
     
-    let FahrenheitZero: Int = 273
-    let FeetsRatio: Float = 2.8
+    let FahrenheitCoefficient: Float = 1.8
+    let FahrenheitShift: Int = 32
+    let MilesRatio: Float = 0.621371192
     
     var temperature: Int = 0
     var temperatureCelsius: Int {
         return temperature
     }
     var temperatureFahrenheit: Int {
-        return temperature + FahrenheitZero
+        //let t = Float(temperature) * FahrenheitCoefficient + Float(FahrenheitShift)
+        return Int(Float(temperature) * FahrenheitCoefficient + Float(FahrenheitShift))
     }
     
     var humidity: Int = 0
@@ -34,7 +36,7 @@ class Weather {
     }
     
     var windSpeedFeets: Int {
-        return windSpeed * 3//* FeetsRatio
+        return Int(Float(windSpeed) * MilesRatio)
     }
     
     enum WindDirection: Int {
@@ -102,6 +104,12 @@ class Weather {
     var cloudness: Cloudness = Cloudness.Cloudy
     
     var date: NSDate = NSDate()
+    
+    var weekday: String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.stringFromDate(date)
+    }
     
     
     func getTemperature(temperatureSetting: Settings.TemperatureMeasurement) -> Int{

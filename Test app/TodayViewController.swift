@@ -34,6 +34,11 @@ class TodayViewController: UIViewController {
         location = mockLocation
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
+    }
+    
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         
     }
