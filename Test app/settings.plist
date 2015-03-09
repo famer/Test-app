@@ -5,9 +5,15 @@
 	<key>General</key>
 	<dict>
 		<key>Units of temperature</key>
-		<false/>
+		<array>
+			<string>Celsius</string>
+			<string>Fahrenheit</string>
+		</array>
 		<key>Unit of length</key>
-		<false/>
+		<array>
+			<string>Feets</string>
+			<string>Kilometers</string>
+		</array>
 	</dict>
 </dict>
 </plist>
