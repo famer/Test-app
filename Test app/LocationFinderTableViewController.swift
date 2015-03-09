@@ -17,8 +17,8 @@ class LocationFinderTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //mapKitView.layer.borderColor
-        searchTextField.layer.cornerRadius = 10.0
-        searchTextField.layer.borderColor = UIColor.blueColor().CGColor;
+        searchTextField.layer.cornerRadius = 5.0
+        searchTextField.layer.borderColor = UIColor(rgb: 0x2f91ff).CGColor;
         searchTextField.layer.borderWidth = 1.0;
     }
 
@@ -31,4 +31,15 @@ class LocationFinderTableViewController: UITableViewController {
     }
     
     
+}
+
+extension UIColor {
+    convenience init(rgb: UInt) {
+        self.init(
+            red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgb & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
 }

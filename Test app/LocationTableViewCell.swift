@@ -37,6 +37,20 @@ class LocationTableViewCell: UITableViewCell {
 
     }
     
+    override func willTransitionToState(state: UITableViewCellStateMask) {
+        super.willTransitionToState(state)
+        if ((state & UITableViewCellStateMask.ShowingDeleteConfirmationMask) == UITableViewCellStateMask.ShowingDeleteConfirmationMask) {
+            
+        }
+    }
+    
+    override func didAddSubview(subview: UIView) {
+        print(subview.description)
+        if subview.description == "UITableViewCellDeleteConfirmationView" {
+            subview.removeFromSuperview()
+        }
+    }
+    
     
     
     

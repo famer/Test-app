@@ -68,4 +68,15 @@ class TodayViewController: UIViewController {
     }
     
     
+    @IBAction func shareAction(sender: AnyObject) {
+        var sharingItems = [AnyObject]()
+        let shareText = "Weather in \(location.title): \(weatherDescriptionLabel.text!)"
+        sharingItems.append(shareText)
+        let activityViewController = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
+        //activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,UIActivityTypeAirDrop,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePostToTencentWeibo,UIActivityTypePostToVimeo,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToWeibo]
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+    
+    
+    
 }
