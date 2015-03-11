@@ -8,4 +8,4 @@
 
 ## Screenshot
 
-![](screenshots/screenshot.png)
+![](Screenshots/screenshot.png)
