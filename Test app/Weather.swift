@@ -41,6 +41,31 @@ class Weather {
     
     enum WindDirection: Int {
         case N, NE, E, SE, S, SW, W, NW
+        
+        init(fromDegree: Int) {
+            switch fromDegree {
+            case 0...45:
+                self = .N
+            case 46...90:
+                self = .NE
+            case 91...135:
+                self = .E
+            case 136...180:
+                self = .SE
+            case 181...225:
+                self = .S
+            case 226...270:
+                self = .SW
+            case 271...315:
+                self = .W
+            case 316...360:
+                self = .NW
+            default:
+                self = .N
+            }
+            
+        }
+        
         func description() -> String {
             switch self {
             case .N:
@@ -69,6 +94,15 @@ class Weather {
     
     enum Cloudness {
         case Sunny, Windy, RainShowers, Lightning, Cloudy
+        
+        init(fromString: String) {
+            switch fromString {
+            case "Clear":
+                self = .Sunny
+            default:
+                self = .Sunny
+            }
+        }
         
         func description() -> String {
             switch self {
@@ -130,6 +164,8 @@ class Weather {
         }
     }
     
+    init() {}
+    
     init(temperature: Int) {
         self.temperature = temperature
     }
@@ -144,5 +180,72 @@ class Weather {
         self.cloudness = cloudness
         self.date = date
     }
+    
+    func fetch(data: AnyObject, handler: (() -> ())?) {
+        //self.temperature = ((data.valueForKey("FeelsLikeC") as NSArray!)[0] as String)
+        
+        if let value = data.valueForKey("temp_C") as? NSArray {
+            self.temperature = (value[0] as String).toInt()!
+        }
+        
+        if let value = data.valueForKey("humidity") as? NSArray {
+            self.humidity = (value[0] as String).toInt()!
+        }
+        
+        if let value = data.valueForKey("precipMM") as? NSArray {
+            self.precipitiation = (value[0] as NSString).floatValue
+        }
+        
+        if let value = data.valueForKey("pressure") as? NSArray {
+            self.pressureMB = (value[0] as String).toInt()!
+        }
+        
+        if let value = data.valueForKey("windspeedKmph") as? NSArray {
+            self.windSpeed = (value[0] as String).toInt()!
+        }
+        if let value = data.valueForKey("weatherDesc") as? NSArray {
+            var weatherDescription = value[0][0].valueForKey("value")! as String
+            self.cloudness = Cloudness(fromString: weatherDescription)
+        }
+        
+        
+        if let value = data.valueForKey("winddirDegree") as? NSArray {
+            self.windDirection = Weather.WindDirection(fromDegree: (value[0] as String).toInt()!)
+        }
+        
+        
+    }
+    
+    func fetchWeekly(data: AnyObject, handler: (() -> ())?) {
+        if let value = data.valueForKey("date") as? String {
+            var dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            self.date = dateFormatter.dateFromString(value)!
+        }
+        
+        if let hourly = data.valueForKey("hourly") as? NSArray {
+            
+            if hourly.count != 0 {
+                var values = hourly[0]
+                if let _temperature = values.valueForKey("tempC") as String! {
+                    self.temperature = _temperature.toInt()!
+                }
+                
+                if let value = values.valueForKey("weatherDesc") as? NSArray {
+                    var weatherDescription = value[0].valueForKey("value")! as String
+                    self.cloudness = Cloudness(fromString: weatherDescription)
+                }
+            }
+            
+        }
+        //winddirDegree
+        //windspeedKmph
+        if let _handler = handler {
+            _handler()
+        }
+
+    }
+    
 
 }

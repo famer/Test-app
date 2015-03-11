@@ -11,16 +11,37 @@ import UIKit
 class LocationsTableViewController: UITableViewController {
     
     var locations: [Location] = []
+    let locationsSet = Locations.sharedInstance
+    var locationsArray: [String] {
+        get {
+            return locationsSet.locationsString
+        }
+        set {
+            locationsSet.locationsString = newValue
+        }
+    }
+    
+    //var tableViewNew: UITableView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let location1 = Location(title: "Vienna")
-        location1.currentGeoLocation = true
-        location1.currentWeather = Weather(temperature: 12, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Sunny, date: NSDate())
-        let location2 = Location(title: "Paris")
-        location2.currentWeather = Weather(temperature: 8, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Cloudy, date: NSDate())
+       
         
-        locations = [location1, location2]
+
+        /*
+        tableViewNew = self.tableView
+        
+        var replacementView: UIView = UIView(frame: self.tableView.frame)
+        replacementView.addSubview(tableViewNew!)
+        
+        
+        let addButton = self.tableViewNew!.tableFooterView!
+        
+        
+        replacementView.addSubview(addButton)
+        
+        self.view = replacementView
+        */
         
         
     }
@@ -31,6 +52,19 @@ class LocationsTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        mainLoop: for locationName in locationsArray {
+            for location in locations {
+                if locationName == location.title {
+                    continue mainLoop
+                }
+            }
+            let location = Location(title: locationName)
+            locations.append(location)
+            location.load({
+                self.updateUI()
+            })
+        }
+        
         updateUI()
     }
     
@@ -51,9 +85,17 @@ class LocationsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Location Cell", forIndexPath: indexPath) as LocationTableViewCell
+        
         let location = self.locations[indexPath.row] as Location
         cell.location = location
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //locationsSet.currentLocationString = locationsSet.locations[indexPath.row]
+        locationsSet.currentLocation = locations[indexPath.row]
+        self.dismissViewControllerAnimated(true, completion: nil)
+        locationsSet.saveState()
     }
 
     
@@ -63,16 +105,21 @@ class LocationsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle:UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        //navigation.places.deleteFromRemoved(indexPath.row)
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             locations.removeAtIndex(indexPath.row)
+            var newLocationsArray: [String] = []
+            for location in locations {
+                newLocationsArray.append(location.title)
+            }
+            locationsArray = newLocationsArray
+            locationsSet.saveState()
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation:UITableViewRowAnimation.Fade)
         }
         
     }
     
     override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String! {
-        return "x"
+        return "Delete"
     }
     
 

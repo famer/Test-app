@@ -21,10 +21,10 @@ class TodayViewController: UIViewController {
     @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var windDirectionLabel: UILabel!
     
-    var location: Location = Location() {
-        didSet {
-            updateUI()
-        }
+    let locationsSet = Locations.sharedInstance
+    
+    var location: Location {
+        return locationsSet.currentLocation
     }
     
     override func viewDidLoad() {
@@ -32,11 +32,17 @@ class TodayViewController: UIViewController {
         var locationHelper = LocationHelper.sharedInstance
         locationHelper.completionBlock = {result in
             (
+                
+                self.updateUI()
             )
         }
-        let mockLocation = Location(title: "Prague")
-        mockLocation.currentWeather = Weather(temperature: 8, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Windy, date: NSDate())
-        location = mockLocation
+        locationsSet.loadState()
+        location.load({
+            self.updateUI()
+        })
+        
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -54,7 +60,7 @@ class TodayViewController: UIViewController {
         locationLabel.text = location.fullTitle
         
         
-        if let weather = location.currentWeather {
+        let weather = location.currentWeather
             
             let lengthMeasure = Settings.LengthMeasurement(rawValue: Settings.getOptionValue("Unit of length"))!
             let tempertureMeasure = Settings.TemperatureMeasurement(rawValue: Settings.getOptionValue("Units of temperature"))!
@@ -69,7 +75,7 @@ class TodayViewController: UIViewController {
             windSpeedLabel.text = "\(weather.getWindSpeed(lengthMeasure)) \(lengthMeasure.symbol)/h"
             windDirectionLabel.text = "\(weather.windDirection.description())"
             
-        }
+        
     }
     
     

@@ -10,6 +10,7 @@ import UIKit
 
 class ForecastTableViewController: UITableViewController {
     
+    let locationsSet = Locations.sharedInstance
     var location: Location = Location() {
         didSet {
             updateUI()
@@ -24,12 +25,16 @@ class ForecastTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
         let weather1 = Weather(temperature: 12, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Cloudy, date: NSDate())
         let weather2 = Weather(temperature: 15, humidity: 52, precipitiation: 0.5, pressureMB: 1002, windSpeed: 20, windDirection: .NE, cloudness: Weather.Cloudness.Sunny, date: NSDate().dateByAddingTimeInterval(60*60*24))
         
         location = Location(title: "Vienna")
         location.weeklyWeather = [weather1, weather2]
+        */
+        
+        location = locationsSet.currentLocation
+        
         
         
     }

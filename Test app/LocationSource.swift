@@ -18,6 +18,7 @@ class LocationSource: NSObject, CLLocationManagerDelegate  {
     var currentAltitude: CLLocationDistance = 0.0
     var currentHorizontalAccuracy: CLLocationAccuracy = 0.0
     var currentHeading: CLLocationDirection = 0.0
+    var locality: String = ""
     
     var delegate: LocationHelper?
     
@@ -47,15 +48,32 @@ class LocationSource: NSObject, CLLocationManagerDelegate  {
         currentLatitude = manager.location.coordinate.latitude
         currentLongitude = manager.location.coordinate.longitude
         
-        delegate?.locationUpdated(manager.location)
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+            
+            if (error != nil) {
+                println("Reverse geocoder failed with error" + error.localizedDescription)
+                return
+            }
+            
+            if placemarks.count > 0 {
+                if let placemark = placemarks[0] as? CLPlacemark {
+                    if let _locality = placemark.locality {
+                        if _locality != "" {
+                            self.delegate?.locationUpdated(manager.location)
+                            self.locality = _locality
+                            self.locationManager.stopUpdatingLocation()
+                        }
+                    }
+                }
+            } else {
+                println("Problem with the data received from geocoder")
+            }
+        })
+        
+        
         
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
-        currentHeading = newHeading.trueHeading
-        if delegate != nil && manager.location != nil {
-            delegate?.locationUpdated(manager.location)
-        }
-    }
+    
     
 }

@@ -8,11 +8,11 @@
 
 import UIKit
 
-class LocationFinderTableViewController: UITableViewController {
+class LocationFinderTableViewController: UITableViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var searchTextField: UITextField!
-    
-    var locations: [Location] = []
+    let locationsSet = Locations.sharedInstance
+    var locations: [String] = ["Vienna", "Prague", "San Francisco", "Tokyo"]
+    var locationsFiltered: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,7 @@ class LocationFinderTableViewController: UITableViewController {
         searchTextField.layer.cornerRadius = 5.0
         searchTextField.layer.borderColor = UIColor(rgb: 0x2f91ff).CGColor;
         searchTextField.layer.borderWidth = 1.0;
+        locationsFiltered = locations
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -27,9 +28,58 @@ class LocationFinderTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locations.count
+        return locationsFiltered.count
     }
     
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Location Cell", forIndexPath: indexPath) as UITableViewCell
+        cell.textLabel!.text = locationsFiltered[indexPath.row]
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        locationsSet.addLocation(locationsFiltered[indexPath.row])
+        locationsSet.saveState()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+        
+    }
+    
+    
+    @IBOutlet private weak var searchTextField: UITextField! {
+        didSet {
+            searchTextField.delegate = self
+        }
+    }
+    
+    @IBAction func changedText() {
+        let text = searchTextField.text.lowercaseString
+        if text != "" {
+            locationsFiltered = []
+            for location in locations {
+                if location.lowercaseString.rangeOfString(text) != nil {
+                    locationsFiltered.append(location)
+                }
+            }
+        } else {
+            locationsFiltered = locations
+        }
+        self.tableView.reloadData()
+    }
+    
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        return true
+    }
+    
+     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        return true
+    }
+
     
 }
 

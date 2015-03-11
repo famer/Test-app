@@ -25,8 +25,11 @@ class LocationHelper {
     var currentHeading: Double {
         return self.locationSource.currentLocation!.course
     }
+    var locality: String {
+        return self.locationSource.locality
+    }
     
-    var completionBlock: ((String?) -> ())?
+    var completionBlock: ((String) -> ())?
     
     init() {
         locationSource.delegate = self
@@ -36,7 +39,7 @@ class LocationHelper {
     
     func locationUpdated(location: CLLocation) {
         if let _completionBlock = completionBlock {
-            _completionBlock(nil)
+            _completionBlock(self.locality)
         }
     }
     

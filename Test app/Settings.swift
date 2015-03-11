@@ -76,4 +76,12 @@ class Settings {
         NSUserDefaults.standardUserDefaults().setObject(value, forKey: title)
     }
     
+    class func getSavedValue(title: String) -> AnyObject? {
+        return NSUserDefaults.standardUserDefaults().objectForKey(title)
+    }
+    
+    class func saveValue(title: String, value: AnyObject) {
+        NSUserDefaults.standardUserDefaults().setObject(value, forKey: title)
+    }
+
 }

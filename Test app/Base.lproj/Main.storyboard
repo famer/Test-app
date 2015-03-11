@@ -14,6 +14,8 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
             <string>ProximaNova-Semibold</string>
@@ -58,7 +60,8 @@
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WM6-TE-AXN">
-                                    <rect key="frame" x="549" y="25" width="37" height="30"/>
+                                    <rect key="frame" x="550" y="25" width="36" height="27"/>
+                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                     <state key="normal" title="Done"/>
                                     <connections>
                                         <segue destination="bY5-iT-h0L" kind="unwind" unwindAction="unwindToMain:" id="wMe-tV-B2F"/>
@@ -190,17 +193,21 @@
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9u-q1-0mp">
-                                    <rect key="frame" x="546" y="22" width="40" height="30"/>
+                                    <rect key="frame" x="548" y="24" width="38" height="27"/>
+                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                     <state key="normal" title="Close"/>
                                     <connections>
                                         <segue destination="4Zj-b4-k3Q" kind="unwind" unwindAction="unwindToMain:" id="Obv-ks-6NE"/>
                                     </connections>
                                 </button>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="New York" borderStyle="roundedRect" placeholder="Location" minimumFontSize="17" background="Search" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="ieP-hf-wmb">
-                                    <rect key="frame" x="8" y="22" width="528" height="30"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" minimumFontSize="17" background="Search" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="ieP-hf-wmb">
+                                    <rect key="frame" x="8" y="22" width="530" height="30"/>
                                     <color key="textColor" red="0.16470588235294117" green="0.4823529411764706" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <action selector="changedText" destination="3Ua-JL-Gkm" eventType="editingChanged" id="Ewf-eJ-Rt4"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -227,7 +234,7 @@
                             </variation>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="o5O-PV-kJn" style="IBUITableViewCellStyleDefault" id="cYh-kS-WET">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Location Cell" textLabel="o5O-PV-kJn" style="IBUITableViewCellStyleDefault" id="cYh-kS-WET">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cYh-kS-WET" id="aBR-gr-u9v">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -248,7 +255,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="searchTextField" destination="ieP-hf-wmb" id="gaM-Ci-ab1"/>
+                        <outlet property="searchTextField" destination="ieP-hf-wmb" id="qou-Bs-JZq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EMC-Xk-fUW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -472,7 +479,7 @@
                         <viewControllerLayoutGuide type="top" id="nhZ-oO-ORz"/>
                         <viewControllerLayoutGuide type="bottom" id="52Q-yd-zhQ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Lbr-G6-yEI">
+                    <view key="view" contentMode="scaleToFill" id="Lbr-G6-yEI" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -706,7 +713,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZz-xk-GLV">
-                                <rect key="frame" x="277" y="495" width="47" height="30"/>
+                                <rect key="frame" x="277" y="524" width="47" height="30"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="18"/>
                                 <state key="normal" title="Share">
                                     <color key="titleColor" red="0.95686274509803926" green="0.39215686274509803" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
@@ -724,6 +731,7 @@
                             <constraint firstItem="Muj-CO-EUM" firstAttribute="leading" secondItem="Lbr-G6-yEI" secondAttribute="leadingMargin" id="7ze-Wc-0Ml"/>
                             <constraint firstAttribute="centerX" secondItem="JZz-xk-GLV" secondAttribute="centerX" id="GvD-3j-CPV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Muj-CO-EUM" secondAttribute="trailing" id="Mq7-Gc-7M2"/>
+                            <constraint firstItem="JZz-xk-GLV" firstAttribute="top" secondItem="Muj-CO-EUM" secondAttribute="bottom" constant="8" id="Uyp-Wu-Sws"/>
                             <constraint firstItem="WBX-uz-Rf7" firstAttribute="top" secondItem="3aK-yj-Pe5" secondAttribute="bottom" constant="53" id="WJO-1k-mLO"/>
                             <constraint firstItem="3aK-yj-Pe5" firstAttribute="leading" secondItem="Lbr-G6-yEI" secondAttribute="leadingMargin" constant="-16" id="ZFY-fC-Igr"/>
                             <constraint firstItem="3aK-yj-Pe5" firstAttribute="top" secondItem="Lbr-G6-yEI" secondAttribute="topMargin" id="Znf-HJ-veq"/>
@@ -733,6 +741,11 @@
                             <constraint firstAttribute="centerX" secondItem="WBX-uz-Rf7" secondAttribute="centerX" id="rUq-ji-wQ0"/>
                             <constraint firstAttribute="centerX" secondItem="Muj-CO-EUM" secondAttribute="centerX" id="v7P-KO-eMe"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2aa-bQ-MGf"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Today" image="Today" id="byY-Rk-VAl"/>
                     <connections>
