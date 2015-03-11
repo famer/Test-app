@@ -18,7 +18,7 @@ class SettingsTableViewController: UITableViewController {
         let path: String = NSBundle.mainBundle().pathForResource("settings", ofType:"plist")!
         settings = NSDictionary(contentsOfFile: path)!
         sections = settings.allKeys as [String]
-        print(sections)
+        
         //self.tableView.backgroundColor = UIColor.whiteColor()
     }
     
