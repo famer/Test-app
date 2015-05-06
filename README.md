@@ -1,5 +1,7 @@
 # Test Weather app
 
+![](Screenshots/actions.jpg)
+
 ## Instructions
 
 * Clone git repository

@@ -20,9 +20,9 @@ class TodayViewController: UIViewController {
     @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var windDirectionLabel: UILabel!
+    @IBOutlet var scrollView: UIScrollView!
     
     let locationsSet = Locations.sharedInstance
-    
     var location: Location {
         return locationsSet.currentLocation
     }
@@ -40,7 +40,6 @@ class TodayViewController: UIViewController {
         location.load({
             self.updateUI()
         })
-        
         
         
     }
