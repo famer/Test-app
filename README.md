@@ -1,6 +1,6 @@
 # Test Weather app
 
-![](Screenshots/actions.jpg)
+![](Screenshots/actionsl.jpg)
 
 ## Instructions
 
